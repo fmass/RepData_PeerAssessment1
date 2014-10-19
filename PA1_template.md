@@ -8,7 +8,7 @@ Friday, October 17, 2014
 **1. Loading activity.csv**
 
 ```r
-activities=read.csv(file)
+activities=read.csv("activity.csv")
 ```
 
 **2. Process/transform the data into a format suitable for our analysis.**
@@ -52,7 +52,8 @@ medianSteps <- median(sumStepsPerDay$steps)
 ```r
 meanStepsPerInterval <- aggregate(steps ~ interval, activitiesR, mean)
 names(meanStepsPerInterval)<-c("interval","MeanSteps")
-plot(meanStepsPerInterval, type="l", xlab="Interval", ylab="Mean steps", main="Mean number of steps taken per 5-minutes interval across all days")
+plot(meanStepsPerInterval, type="l", xlab="Interval", ylab="Mean steps", 
+     main="Mean number of steps taken per 5-minutes interval across all days")
 ```
 
 ![](./PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
@@ -100,7 +101,8 @@ simulated <- simulated[,!(names(simulated) %in% c("MeanSteps"))]
 
 ```r
 sumStepsPerDaySimulated<-aggregate(steps~date,simulated,sum)
-hist(sumStepsPerDaySimulated$steps, xlab="Steps", main="Histogram of the total number of steps taken each day with the missing  data filled in")
+hist(sumStepsPerDaySimulated$steps, xlab="Steps", 
+     main="Histogram of the total number of steps taken each day with the missing  data filled in")
 ```
 
 ![](./PA1_template_files/figure-html/unnamed-chunk-10-1.png) 
@@ -112,10 +114,7 @@ medianStepsSimulated <- median(sumStepsPerDaySimulated$steps)
 
 The mean values did not change and the median did not changed significantly because we used the average on the 5-minutes interval.
 
-- Mean: **10766.1886792** steps per day
 - Mean (simulated): **10766.1886792** steps per day
-
-- Median: **10765** steps per day
 - Median (simulated): **10766.1886792** steps per day
 
 ## Are there differences in activity patterns between weekdays and weekends?
@@ -127,7 +126,8 @@ For this part, we use the dataset with the filled-in missing values.
 
 ```r
 #0 is Sunday and 6 is Saturday 
-simulated$daytype <- sapply(as.POSIXlt(simulated$date)$wday, function(x){if(x==6 || x==0) "weekend" else "weekday"})
+simulated$daytype <- sapply(as.POSIXlt(simulated$date)$wday, function(x){if(x==6 || x==0) "weekend" 
+                                                                         else "weekday"})
 ```
 
 **2. We make two panel plots containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days and another for weekend days (y-axis).**
