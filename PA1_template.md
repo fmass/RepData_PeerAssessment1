@@ -139,3 +139,4 @@ xyplot(steps ~ interval | daytype, data = meanStepsPerInterval, layout = c(1, 2)
 ```
 
 ![](./PA1_template_files/figure-html/unnamed-chunk-12-1.png) 
+
